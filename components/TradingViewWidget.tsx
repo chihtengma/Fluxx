@@ -27,7 +27,7 @@ const TradingViewWidget = ({
         <h3 className="font-semibold text-2xl text-gray-100 mb-5">{title}</h3>
       )}
       <div
-        className={cn("traingview-widget-container", className)}
+        className={cn("tradingview-widget-container", className)}
         ref={containerRef}
       >
         <div
