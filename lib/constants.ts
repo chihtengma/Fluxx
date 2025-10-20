@@ -9,6 +9,6 @@ export const NAV_ITEMS: { href: string; label: string }[] = [
   },
   {
     href: "/watchlist",
-    label: "Wawtchlist",
+    label: "Watchlist",
   },
 ];

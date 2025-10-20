@@ -37,7 +37,7 @@ const UserDropdown = () => {
           <Avatar className="h-9 w-9">
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback className="bg-yellow-500 text-yellow-900 text-sm font-bold">
-              {user.name[0]}
+              {user.name[0] || "U"}
             </AvatarFallback>
           </Avatar>
 
@@ -57,7 +57,7 @@ const UserDropdown = () => {
             <Avatar className="w-11 h-11">
               <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback className="bg-yellow-500 text-yellow-900 text-sm font-bold">
-                {user.name[0]}
+                {user.name[0] || "U"}
               </AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
