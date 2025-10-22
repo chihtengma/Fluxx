@@ -46,7 +46,13 @@ const setupConnectionListeners = () => {
   // Graceful shutdown
   const cleanup = async () => {
     try {
-      await mongoose.connection.close();
+      await Promise.race([
+        mongoose.connection.close(),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Close timeout")), 1000),
+        ),
+      ]);
+
       console.log("[MongoDB] Connection closed through app termination");
       process.exit(0);
     } catch (err) {
