@@ -3,8 +3,10 @@
 import FooterLink from "@/components/forms/FooterLink";
 import InputField from "@/components/forms/InputField";
 import { Button } from "@/components/ui/button";
+import { signInWithEmail } from "@/lib/actions/auth.actions";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const SignIn = () => {
   const router = useRouter();
@@ -22,9 +24,16 @@ const SignIn = () => {
 
   const onSubmit = async (data: SignInFormData) => {
     try {
-      console.log(data);
+      const result = await signInWithEmail(data);
+
+      if (result.success) {
+        router.push("/");
+      }
     } catch (err) {
       console.error(err);
+      toast.error("Sign in failed", {
+        description: err instanceof Error ? err.message : "Failed to log in.",
+      });
     }
   };
 
@@ -59,6 +68,7 @@ const SignIn = () => {
           type="submit"
           disabled={isSubmitting}
           className="yellow-btn w-full mt-5"
+          onClick={handleSubmit(onSubmit)}
         >
           {isSubmitting ? "Signing In" : "Sign In"}
         </Button>

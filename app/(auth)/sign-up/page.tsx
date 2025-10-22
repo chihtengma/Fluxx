@@ -5,14 +5,19 @@ import FooterLink from "@/components/forms/FooterLink";
 import InputField from "@/components/forms/InputField";
 import SelectField from "@/components/forms/SelectField";
 import { Button } from "@/components/ui/button";
+import { signUpWithEmail } from "@/lib/actions/auth.actions";
 import {
   INVESTMENT_GOALS,
   PREFERRED_INDUSTRIES,
   RISK_TOLERANCE_OPTIONS,
 } from "@/lib/constants";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const SignUp = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -32,10 +37,19 @@ const SignUp = () => {
   });
 
   const onSubmit = async (data: SignUpFormData) => {
+    console.log("Client-side form data:", data);
     try {
-      console.log(data);
+      const result = await signUpWithEmail(data);
+
+      if (result.success) {
+        router.push("/");
+      }
     } catch (err) {
       console.error(err);
+      toast.error("Sign up failed", {
+        description:
+          err instanceof Error ? err.message : "Failed to create an account",
+      });
     }
   };
 
@@ -50,7 +64,13 @@ const SignUp = () => {
           placeholder="John Doe"
           register={register}
           error={errors.fullName}
-          validation={{ required: "Full name is required", minLenght: 2 }}
+          validation={{
+            required: "Full name is required",
+            minLength: {
+              value: 2,
+              message: "Name must be at least 2 characters"
+            }
+          }}
         />
         <InputField
           name="email"
@@ -60,17 +80,26 @@ const SignUp = () => {
           error={errors.email}
           validation={{
             required: "Email is required",
-            pattern: /^w+@\w+\.\w+$/,
-            message: "Email address is required",
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              message: "Please enter a valid email address",
+            }
           }}
         />
         <InputField
           name="password"
           label="Password"
+          type="password"
           placeholder="Enter a strong password"
           register={register}
           error={errors.password}
-          validation={{ required: "Password is required", minLenght: 8 }}
+          validation={{
+            required: "Password is required",
+            minLength: {
+              value: 8,
+              message: "Password must be at least 8 characters"
+            }
+          }}
         />
 
         <CountrySelectField

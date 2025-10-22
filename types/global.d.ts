@@ -31,7 +31,6 @@ declare global {
     error?: FieldError;
     validation?: RegisterOptions;
     disabled?: boolean;
-    value?: string;
   };
 
   type Option = {
