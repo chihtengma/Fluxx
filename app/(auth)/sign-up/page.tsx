@@ -68,8 +68,8 @@ const SignUp = () => {
             required: "Full name is required",
             minLength: {
               value: 2,
-              message: "Name must be at least 2 characters"
-            }
+              message: "Name must be at least 2 characters",
+            },
           }}
         />
         <InputField
@@ -83,7 +83,7 @@ const SignUp = () => {
             pattern: {
               value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
               message: "Please enter a valid email address",
-            }
+            },
           }}
         />
         <InputField
@@ -97,8 +97,8 @@ const SignUp = () => {
             required: "Password is required",
             minLength: {
               value: 8,
-              message: "Password must be at least 8 characters"
-            }
+              message: "Password must be at least 8 characters",
+            },
           }}
         />
 
@@ -146,7 +146,7 @@ const SignUp = () => {
           {isSubmitting ? "Creating Account" : "Start Your Investing Journey"}
         </Button>
         <FooterLink
-          text="Already hanve an account?"
+          text="Already have an account?"
           linkText="Sign in"
           href="/sign-in"
         />
