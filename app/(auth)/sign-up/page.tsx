@@ -37,7 +37,6 @@ const SignUp = () => {
   });
 
   const onSubmit = async (data: SignUpFormData) => {
-    console.log("Client-side form data:", data);
     try {
       const result = await signUpWithEmail(data);
 

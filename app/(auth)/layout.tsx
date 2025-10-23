@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const session = await auth.api.getSession({ headers: await headers() });
 
-  if (!session?.user) redirect("/");
+  if (session?.user) redirect("/");
 
   return (
     <main className="auth-layout">
@@ -31,7 +31,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
       <section className="auth-right-section">
         <div className="z-10 relative lg:mt-4 lg:mb-16">
           <blockquote className="auth-blockquote">
-            Fluxx turned my watchlist into a winning list. The alerts are
+            Signalist turned my watchlist into a winning list. The alerts are
             spot-on, and I feel more confident making moves in the market
           </blockquote>
 
