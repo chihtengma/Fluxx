@@ -14,8 +14,6 @@ export const signUpWithEmail = async ({
   preferredIndustry,
 }: SignUpFormData) => {
   try {
-    console.log("Attempting sign up with:", { email, name: fullName });
-
     const response = await auth.api.signUpEmail({
       body: {
         email: email.trim(),
